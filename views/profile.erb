@@ -1,0 +1,22 @@
+<h1><%= @user_name %></h1>
+<h3><%= @user_email %></h3>
+
+<% @logs.each do |log| %>
+
+    <div>
+        <p><%= log['log'] %></p>
+        <p><%= log['date'] %></p>
+        <p><%= log['min_temp'] %></p>
+        <p><%= log['max_temp'] %></p>
+        <form action="/update_log?id=<%= log['id'] %>" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="text" name="log" value="<%= log['log'] %>">
+            <button>update log</button>
+        </form>
+        <form action="/delete_log?id=<%= log['id'] %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button>delete log</button>
+        </form>
+    </div>
+
+<% end %>

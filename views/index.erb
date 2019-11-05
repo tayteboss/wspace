@@ -1,0 +1,14 @@
+
+
+<h1>w.space <%= @user_name %></h1>
+
+<form action="/create_log" method="post">
+
+    <input type="textarea" name="log">
+    <button>Tell the world</button>
+
+</form>
+
+<h3>min temp is <%= @min_temp %></h3>
+<h3>min temp is <%= @max_temp %></h3>
+<img src="../img/tile-log-grad-<%=@weather_symbol_code%>.png" alt="">

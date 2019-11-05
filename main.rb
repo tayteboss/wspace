@@ -1,0 +1,140 @@
+require 'pry'
+require 'sinatra'
+require 'sinatra/reloader'
+also_reload 'models/*'
+require 'pg'
+enable :sessions
+
+require_relative 'models/model.rb'
+
+
+get '/' do # if not logged in... take to login page
+
+  weather = todays_weather()
+  @weather_symbol_code = weather['weather_symbol_code']
+  @min_temp = weather['min_temp']
+  @max_temp = weather['max_temp']
+
+  if logged_in?
+    erb :index
+    else
+      erb :login
+  end
+
+end
+
+
+# USERS ---------------------------------------------
+
+get '/login_user' do # read login
+
+  erb :login
+
+end
+
+post '/login_user' do # post login
+
+  email = params[:email]
+  password = params[:password]
+
+  user = find_user(email)
+
+  if BCrypt::Password.new( user["digested_password"]) == password
+    session[:user_id] = user["id"]
+  else 
+    return erb :incorrect_login
+  end
+
+  redirect '/'
+
+end
+
+get '/create_user' do # read signup
+
+  erb :signup
+
+end
+
+post '/create_user' do # post signup
+
+  name = params[:name]
+  email = params[:email]
+  password = params[:password]
+  location = params[:location]
+
+  create_user(name, email, password, location)
+
+end
+
+get '/profile_user' do # read profile
+  
+  user = find_one_user(session[:user_id])
+  @user_name = user["name"]
+  @user_email = user["email"]
+  user_id = user["id"]
+
+  @logs = find_user_logs(user_id)
+
+  erb :profile
+  
+end
+
+get '/success' do # success signup
+
+  erb :success
+
+end
+
+def logged_in?
+
+  return !!current_user
+
+end
+
+def current_user
+
+  user = find_one_user(session[:user_id])
+
+  @user_email = user["email"]
+  @user_name = user["name"]
+
+end
+
+
+
+# LOGS ---------------------------------------------
+
+post '/create_log' do # post log
+
+  user = find_one_user(session[:user_id])
+  user_id = user["id"]
+  log = params[:log]
+  date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
+
+  create_log(log, date, user_id)
+
+  redirect '/'
+
+end
+
+delete '/delete_log' do # delete log
+
+  delete_log(params[:id])
+
+  redirect '/profile_user'
+
+end
+
+patch '/update_log' do # update log
+
+  update_log(params[:id], params[:log])
+
+  redirect '/profile_user'
+
+end
+
+
+
+
+
+
