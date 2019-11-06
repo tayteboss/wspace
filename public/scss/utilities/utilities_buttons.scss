@@ -1,0 +1,31 @@
+@import "../settings/settings_main.scss";
+
+.button {
+    border: none;
+    border-radius: 100px;
+    padding: 5px 20px;
+    font-size: 13px;
+    transition: box-shadow 400ms ease;
+}
+.grey-btn {
+    border: none;
+    background-color: $light-grey;
+    border-radius: 100px;
+    padding: 5px 20px;
+    font-size: 13px;
+}
+
+.post-log-btn {
+    width: 125px;
+}
+
+.button:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, .2);
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+    padding-top: 2px;
+}

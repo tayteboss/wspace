@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px; }
+
+* {
+  box-sizing: border-box; }
+
+*:focus {
+  outline: none; }
+
+a {
+  text-decoration: none; }
+
+@font-face {
+  font-family: "Studio Pro Reg";
+  src: url(/assets/fonts/Studio_Pro_Regular.ttf); }
+
+@font-face {
+  font-family: "Studio Pro Med";
+  src: url(/assets/fonts/Studio_Pro_Medium.ttf); }
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 200; }
+
+h1 {
+  font-size: 2.786em;
+  line-height: 1.2; }
+
+h2 {
+  font-size: 1.571em; }
+
+h3 {
+  font-size: 1.357em; }
+
+h4 {
+  font-size: 1.214em; }
+
+.button {
+  border: none;
+  border-radius: 100px;
+  padding: 5px 20px;
+  font-size: 13px;
+  transition: box-shadow 400ms ease; }
+
+.grey-btn {
+  border: none;
+  background-color: #F2F2F2;
+  border-radius: 100px;
+  padding: 5px 20px;
+  font-size: 13px; }
+
+.post-log-btn {
+  width: 125px; }
+
+.button:hover {
+  cursor: pointer;
+  box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, 0.2); }
+
+.logout-btn {
+  border: none;
+  background: none;
+  padding-top: 2px; }

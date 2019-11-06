@@ -15,6 +15,9 @@ get '/' do # if not logged in... take to login page
   @min_temp = weather['min_temp']
   @max_temp = weather['max_temp']
 
+  @todays_logs = find_todays_logs()
+  # @past_week_logs = find_past_week_logs()
+
   if logged_in?
     erb :index
     else
@@ -39,10 +42,14 @@ post '/login_user' do # post login
 
   user = find_user(email)
 
-  if BCrypt::Password.new( user["digested_password"]) == password
-    session[:user_id] = user["id"]
-  else 
-    return erb :incorrect_login
+  if user != nil
+    if BCrypt::Password.new( user["digested_password"]) == password
+      session[:user_id] = user["id"]
+    else 
+      return erb :incorrect_login
+  end
+    else
+      return erb :incorrect_login
   end
 
   redirect '/'
@@ -64,6 +71,8 @@ post '/create_user' do # post signup
 
   create_user(name, email, password, location)
 
+  redirect '/success'
+
 end
 
 get '/profile_user' do # read profile
@@ -77,6 +86,11 @@ get '/profile_user' do # read profile
 
   erb :profile
   
+end
+
+delete '/logout_user' do
+  session[:user_id] = nil
+  redirect "/login_user"
 end
 
 get '/success' do # success signup
@@ -110,8 +124,11 @@ post '/create_log' do # post log
   user_id = user["id"]
   log = params[:log]
   date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
+  min_temp = params[:min_temp]
+  max_temp = params[:max_temp]
+  weather_symbol_code = params[:weather_symbol_code]
 
-  create_log(log, date, user_id)
+  create_log(log, date, user_id, min_temp, max_temp, weather_symbol_code)
 
   redirect '/'
 

@@ -1,3 +1,22 @@
-body {
-    background-color: red;
-}
+// LAYOUTS
+@import "layouts_layouts.scss";
+@import "layouts_login.scss";
+@import "layouts_footer.scss";
+
+// MODULES
+@import "../modules/module_login.scss";
+@import "../modules/module_success.scss";
+@import "../modules/module_index-header.scss";
+@import "../modules/module_index-logs.scss";
+@import "../modules/module_log-overlay.scss";
+
+// SETTINGS
+@import "../settings/settings_main.scss";
+
+// STATES
+@import "../states/states_weather.scss";
+
+// UTILITIES
+@import "../utilities/utilities_buttons.scss";
+@import "../utilities/utilities_main.scss";
+

@@ -39,13 +39,7 @@ end
 
 # LOGS ---------------------------------------------
 
-def create_log(log, date, user_id)
-
-    weather = todays_weather()
-
-    weather_symbol_code = weather['weather_symbol_code']
-    min_temp = weather['min_temp']
-    max_temp = weather['max_temp']
+def create_log(log, date, user_id, min_temp, max_temp, weather_symbol_code)
 
     return run_sql("insert into logs (log, date, weather, min_temp, max_temp, user_id)
         values ('#{log}', '#{date}', '#{weather_symbol_code}', '#{min_temp}', '#{max_temp}', '#{user_id}')")
@@ -75,6 +69,23 @@ end
 def find_user_logs(user_id)
 
     return run_sql("select * from logs where user_id = #{user_id}")
+
+end
+
+def find_todays_logs()
+
+    date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
+    return run_sql("select * from logs where date = '#{date}'")
+
+end
+
+def find_past_week_logs()
+
+    1.upto(7) do |num|
+    
+        return run_sql("select * from logs where date = '#{Time.now.day - num}:#{Time.now.month}:#{Time.now.year}'")
+
+    end
 
 end
 

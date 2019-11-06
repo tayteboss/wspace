@@ -1,0 +1,18 @@
+.success-wrapper .success-cta {
+  background-image: url("/assets/img/success-grad-1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .success-wrapper .success-cta h1 {
+    color: #fff;
+    margin-top: 0.714em;
+    margin-bottom: 1.271em; }
+  .success-wrapper .success-cta__wrapper {
+    width: 55.000em; }
+    .success-wrapper .success-cta__wrapper img {
+      width: 11.429em; }

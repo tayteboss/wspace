@@ -1,0 +1,8 @@
+footer div {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.143em; }
+  footer div img {
+    width: 20%; }

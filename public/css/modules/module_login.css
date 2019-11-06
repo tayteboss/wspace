@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px; }
+
+* {
+  box-sizing: border-box; }
+
+*:focus {
+  outline: none; }
+
+a {
+  text-decoration: none; }
+
+@font-face {
+  font-family: "Studio Pro Reg";
+  src: url(/assets/fonts/Studio_Pro_Regular.ttf); }
+
+@font-face {
+  font-family: "Studio Pro Med";
+  src: url(/assets/fonts/Studio_Pro_Medium.ttf); }
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 200; }
+
+h1 {
+  font-size: 2.786em;
+  line-height: 1.2; }
+
+h2 {
+  font-size: 1.571em; }
+
+h3 {
+  font-size: 1.357em; }
+
+h4 {
+  font-size: 1.214em; }
+
+.login {
+  display: flex;
+  flex-direction: column;
+  padding-left: 6%;
+  padding-top: 4.286em; }
+  .login__logo-wrapper .login-logo {
+    width: 33.333%; }
+  .login__inputs-wrapper {
+    padding-top: 5.357em; }
+    .login__inputs-wrapper form {
+      display: flex;
+      flex-direction: column;
+      width: 75%;
+      margin-top: 2.500em; }
+      .login__inputs-wrapper form input {
+        background: none;
+        border: none;
+        border-bottom: 1px solid #E6E6E6;
+        font-size: 1em;
+        margin-bottom: 1.229em; }
+  .login__inputs-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.714em; }
+    .login__inputs-footer a {
+      font-size: 12px;
+      color: #808080;
+      text-decoration: underline; }
+  .login__footnote-wrapper {
+    padding-top: 7.857em; }
+    .login__footnote-wrapper p {
+      color: #808080;
+      transition: color 300ms ease; }
+    .login__footnote-wrapper a {
+      color: #333333; }
+    .login__footnote-wrapper a:hover {
+      color: #333333; }
+
+.login-aside-wrapper {
+  height: 100vh;
+  width: 45vw;
+  overflow: hidden; }
+  .login-aside-wrapper div {
+    width: 50vw;
+    overflow: hidden; }
+
+.login__inputs-wrapper--signup {
+  padding-top: 2.357em; }
+  .login__inputs-wrapper--signup form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin-top: 2.500em; }
+    .login__inputs-wrapper--signup form input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid #E6E6E6;
+      font-size: 1em;
+      margin-bottom: 1.229em; }

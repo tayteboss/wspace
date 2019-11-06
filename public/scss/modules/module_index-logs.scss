@@ -1,0 +1,72 @@
+.logs {
+    padding: 1.071em;
+    padding-bottom: 4.286em;
+
+    .todays-logs {
+
+        &__log-wrapper {
+            display: flex;
+            align-items: center;
+            width: 98vw;
+            overflow-x: scroll;
+            height: 12.143em;
+        }
+    }
+
+}
+
+.log {
+    background-color: #fff;
+    display: flex;
+    border-radius: 10px;
+    width: 570px;
+    margin-right: 25px;
+    height: 140px;
+    position: relative;
+    bottom: 0;
+    transition: box-shadow 400ms ease, bottom 200ms linear;
+
+
+    &__graphic-wrapper {
+        background-image: url(/assets/img/tile-grad-2.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 9.571em;
+        width: 25.714em;
+
+        border-top-left-radius: 0.714em;
+        border-bottom-left-radius: 0.714em;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .temperatures {
+            padding-bottom: 0.7em;
+            color: #fff;
+            font-size: 1.357em;
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+    }
+
+    &__description-wrapper {
+        padding: 0.500em 2.429em;
+        width: 1052px;
+
+        .id-line {
+            color: #999999;
+        }
+
+        h4 {
+            margin-top: 0.714em;
+            margin-bottom: 1.071em;
+        }
+    }
+}
+
+.log:hover {
+    box-shadow: 3px 8px 13px 1px rgba(0, 0, 0, 0.2);
+    bottom: 5px;
+}

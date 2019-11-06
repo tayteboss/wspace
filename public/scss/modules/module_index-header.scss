@@ -1,0 +1,60 @@
+
+.index {
+
+    .header {
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: top;
+        background-size: 140vw;
+
+        height: 24.286em;
+
+        &__nav {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.071em;
+
+            &-img-wrapper {
+
+                img {
+                    width: 7.857em;
+                }
+            }
+
+            &-items {
+
+                a {
+                    color: #fff;
+                    font-size: 1.143em;
+                    margin-left: 0.714em;
+                    transition: opacity 300ms ease;
+                }
+                a:hover {
+                    opacity: 0.6;
+                }
+
+                img {
+                    width: 16px;
+                    position: relative;
+                    top: 2px;
+                }
+            }
+        }
+
+        &__cta {
+            margin-left: 10%;
+            width: 32.857em;
+
+            h1 {
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+.logout-form {
+    display: inline;
+}
