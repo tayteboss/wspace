@@ -34,6 +34,18 @@ def find_one_user(id)
 
 end
 
+def delete_user(user_id)
+
+    run_sql("delete from logs where user_id = '#{user_id}'")
+    return run_sql("delete from users where id = '#{user_id}'")
+
+end
+
+def random_user()
+
+    return run_sql("select id from users ORDER BY random() limit 1")
+
+end
 
 
 
@@ -68,24 +80,32 @@ end
 
 def find_user_logs(user_id)
 
-    return run_sql("select * from logs where user_id = #{user_id}")
+    return run_sql("select * from logs where user_id = #{user_id} order by id desc")
 
 end
 
 def find_todays_logs()
 
     date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
-    return run_sql("select * from logs where date = '#{date}'")
+    return run_sql("select * from logs where date = '#{date}' order by id desc")
 
 end
 
 def find_past_week_logs()
 
-    1.upto(7) do |num|
-    
-        return run_sql("select * from logs where date = '#{Time.now.day - num}:#{Time.now.month}:#{Time.now.year}'")
+    # to do
 
-    end
+end
+
+def find_all_users()
+
+    return run_sql("select * from users;").to_a
+
+end
+
+def count_individual_logs(user_id)
+
+    return run_sql("select count(*) from logs where user_id = #{user_id}")
 
 end
 

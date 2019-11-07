@@ -1,22 +1,69 @@
-<h1><%= @user_name %></h1>
-<h3><%= @user_email %></h3>
+<main class="index">
 
-<% @logs.each do |log| %>
+    <header class="header header--profile header-img-<%= @weather_symbol_code %>">
+        <nav class="header__nav">
+            <div class="header__nav-img-wrapper">
+                <img src="/assets/img/logo-white.svg" alt="">
+            </div>
+            <div class="header__nav-items">
+                <a href="/">feed</a>
+                <a href="/">about</a>
+                <a href="/">profile</a>
+                <form class="logout-form" action="/logout_user" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="logout-btn"><a href="/logout_user"><img src="/assets/img/power.svg" alt=""></a></button>
+                </form>
+            </div>
+        </nav>
+        <section class="header__cta">
+            <h1 class="profile-h1"><%= @user_name %><br> has made <%= @indi_logs["count"] %> posts...</h1>
+            <% if session[:user_id] == @user_id%>
+                <p class="delete-user">delete account...</p>
+                <form class="delete-confirm d-none" action="/delete_user?user_id=<%= session[:user_id] %>" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="delete-user-btn"><p class="delete-user">click again to confirm this action</p></button>
+                </form>
+            <% end %>
+        </section>
+    </header>
 
-    <div>
-        <p><%= log['log'] %></p>
-        <p><%= log['date'] %></p>
-        <p><%= log['min_temp'] %></p>
-        <p><%= log['max_temp'] %></p>
-        <form action="/update_log?id=<%= log['id'] %>" method="post">
-            <input type="hidden" name="_method" value="patch">
-            <input type="text" name="log" value="<%= log['log'] %>">
-            <button>update log</button>
-        </form>
-        <form action="/delete_log?id=<%= log['id'] %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button>delete log</button>
-        </form>
-    </div>
+    <section class="logs">
+        <div class="todays-logs">
+            <% if session[:user_id] == @user_id%>
+                <h1>Your logs:</h1>
+            <% else %>
+                <h1>Users logs:</h1>
+            <% end %>
+            <div class="todays-logs__log-wrapper">
 
-<% end %>
+                <% @users_logs.each do |log| %>
+
+                    <article class="log">
+                        <div class="log__graphic-wrapper tile-img-<%= log["weather"] %>">
+                            <div class="temperatures">
+                                <span><%= log["min_temp"] %>°C</span><span><%= log["max_temp"] %>°C</span>
+                            </div>
+                        </div>
+                        <% @all_users.each do |user| %>
+                            <% if user["id"] == log["user_id"] %>
+                                <div class="log__description-wrapper">
+                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["date"] %></span></p>
+                                    <h4><%= log["log"] %></h4>
+                                </div>
+                            <% end %> 
+                        <% end %>    
+                        <% if session[:user_id] == log["user_id"]%>
+                            <form action="/delete_log?id=<%= log["id"] %>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button class="close-btn"><img class="close" src="/assets/img/exit.svg" alt=""></button>
+                            </form>
+                        <% end %>
+                    </article>
+
+                <% end %>
+
+            </div>
+        </div>
+    </section>
+
+</main>

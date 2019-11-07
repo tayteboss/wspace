@@ -17,7 +17,7 @@
                         <input type="hidden" name="min_temp" value="<%= @min_temp %>">
                         <input type="hidden" name="max_temp" value="<%= @max_temp %>">
                         <input type="hidden" name="weather_symbol_code" value="<%= @weather_symbol_code %>">
-                        <textarea type="text" name="log" placeholder="enter your log here..."></textarea>
+                        <textarea type="text" maxlength="120" name="log" placeholder="enter your log here..."></textarea>
                         <button class="button grey-btn post-log-btn">Tell the world</button>
                     </form>
                 </div>
@@ -34,7 +34,7 @@
             <div class="header__nav-items">
                 <a href="/">feed</a>
                 <a href="/">about</a>
-                <a href="/">profile</a>
+                <a href="/profile_user">profile</a>
                 <form class="logout-form" action="/logout_user" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="logout-btn"><a href="/logout_user"><img src="/assets/img/power.svg" alt=""></a></button>
@@ -60,10 +60,20 @@
                                 <span><%= log["min_temp"] %>°C</span><span><%= log["max_temp"] %>°C</span>
                             </div>
                         </div>
-                        <div class="log__description-wrapper">
-                            <p class="id-line"><%= log["name"] %> from <%= log["location"] %> on <%= log["date"] %></p>
-                            <h4><%= log["log"] %></h4>
-                        </div>
+                        <% @all_users.each do |user| %>
+                            <% if user["id"] == log["user_id"] %>
+                                <div class="log__description-wrapper">
+                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["date"] %></span></p>
+                                    <h4><%= log["log"] %></h4>
+                                </div>
+                            <% end %> 
+                        <% end %>    
+                        <% if session[:user_id] == log["user_id"]%>
+                            <form action="/delete_log?id=<%= log["id"] %>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button class="close-btn"><img class="close" src="/assets/img/exit.svg" alt=""></button>
+                            </form>
+                        <% end %>
                     </article>
 
                 <% end %>

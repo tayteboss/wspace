@@ -18,6 +18,8 @@ get '/' do # if not logged in... take to login page
   @todays_logs = find_todays_logs()
   # @past_week_logs = find_past_week_logs()
 
+  @all_users = find_all_users()
+
   if logged_in?
     erb :index
     else
@@ -75,14 +77,23 @@ post '/create_user' do # post signup
 
 end
 
-get '/profile_user' do # read profile
+get '/profile_user/:id' do # read profile
+
+  user = find_one_user(params[:id])
+
+  weather = todays_weather()
+  @weather_symbol_code = weather['weather_symbol_code']
+  @min_temp = weather['min_temp']
+  @max_temp = weather['max_temp']
   
-  user = find_one_user(session[:user_id])
+  @indi_logs = count_individual_logs(user["id"]).first
+
   @user_name = user["name"]
   @user_email = user["email"]
-  user_id = user["id"]
+  @user_id = user["id"]
 
-  @logs = find_user_logs(user_id)
+  @users_logs = find_user_logs(@user_id)
+  @all_users = find_all_users()
 
   erb :profile
   
@@ -96,6 +107,15 @@ end
 get '/success' do # success signup
 
   erb :success
+
+end
+
+delete '/delete_user' do
+
+  user_id = params[:user_id]
+  delete_user(user_id)
+
+  redirect '/login_user'
 
 end
 
@@ -122,7 +142,7 @@ post '/create_log' do # post log
 
   user = find_one_user(session[:user_id])
   user_id = user["id"]
-  log = params[:log]
+  log = params[:log].gsub("'", "''")
   date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
   min_temp = params[:min_temp]
   max_temp = params[:max_temp]
@@ -138,7 +158,7 @@ delete '/delete_log' do # delete log
 
   delete_log(params[:id])
 
-  redirect '/profile_user'
+  redirect '/'
 
 end
 
