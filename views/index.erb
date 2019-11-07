@@ -6,17 +6,17 @@
     <section class="log-overlay-bg d-none">
         <div class="todays-logs__log-wrapper--overlay">
             <article class="log--overlay">
-                <div class="log--overlay__graphic-wrapper--overlay log-tile-img-<%= @weather_symbol_code %>">
+                <div class="log--overlay__graphic-wrapper--overlay log-tile-img-<%= session[:weather_symbol_code] %>">
                     <div class="temperatures--overlay">
-                        <span><%= @min_temp %>°C</span><span><%= @max_temp %>°C</span>
+                        <span><%= session[:min_temp] %>°C</span><span><%= session[:max_temp] %>°C</span>
                     </div>
                 </div>
                 <div class="log--overlay__description-wrapper--overlay">
                     <h4>Did today's weather make or break you?</h4>
                     <form action="/create_log" method="post">
-                        <input type="hidden" name="min_temp" value="<%= @min_temp %>">
-                        <input type="hidden" name="max_temp" value="<%= @max_temp %>">
-                        <input type="hidden" name="weather_symbol_code" value="<%= @weather_symbol_code %>">
+                        <input type="hidden" name="min_temp" value="<%= session[:min_temp] %>">
+                        <input type="hidden" name="max_temp" value="<%= session[:max_temp] %>">
+                        <input type="hidden" name="weather_symbol_code" value="<%= session[:weather_symbol_code] %>">
                         <textarea type="text" maxlength="120" name="log" placeholder="enter your log here..."></textarea>
                         <button class="button grey-btn post-log-btn">Tell the world</button>
                     </form>
@@ -26,14 +26,13 @@
     </section>
 
 
-    <header class="header header-img-<%= @weather_symbol_code %>">
+    <header class="header backdrop header-img-<%= session[:weather_symbol_code] %>">
         <nav class="header__nav">
             <div class="header__nav-img-wrapper">
                 <a href="/"><img src="/assets/img/logo-white.svg" alt=""></a>
             </div>
             <div class="header__nav-items">
                 <a href="/">feed</a>
-                <a href="/">about</a>
                 <a href="/profile_user/<%= session[:user_id] %>">profile</a>
                 <form class="logout-form" action="/logout_user" method="post">
                     <input type="hidden" name="_method" value="delete">
@@ -63,7 +62,7 @@
                         <% @all_users.each do |user| %>
                             <% if user["id"] == log["user_id"] %>
                                 <div class="log__description-wrapper">
-                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["created_at"] %></span></p>
+                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= Time.new(log['created_at']).strftime("%d.%m.%Y") %></span></p>
                                     <h4><%= log["log"] %></h4>
                                 </div>
                             <% end %> 
@@ -95,7 +94,19 @@
                         <% @all_users.each do |user| %>
                             <% if user["id"] == log["user_id"] %>
                                 <div class="log__description-wrapper">
-                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["created_at"].strftime("%d.%m.%Y")  %></span></p>
+                                    <p class="id-line">
+                                        <a class="mid-grey-link" href="/profile_user/<%= user["id"] %>">
+                                            <%= user["name"] %>
+                                        </a>
+                                        from
+                                        <span class="mid-grey"><%= user["location"] %></span>
+                                        on
+                                        <span class="mid-grey">
+                                            <% created_at = log['created_at'].split(' ').first %>
+                                            <% y, m, d = created_at.split('-')  %>
+                                            <%= d.m.y  %>
+                                        </span>
+                                    </p>
                                     <h4><%= log["log"] %></h4>
                                 </div>
                             <% end %> 

@@ -9,35 +9,26 @@ require_relative 'models/model.rb'
 
 
 get '/' do
-
-  weather = todays_weather()
-  @weather_symbol_code = weather['weather_symbol_code']
-  @min_temp = weather['min_temp']
-  @max_temp = weather['max_temp']
+  redirect '/login' unless logged_in?
 
   @todays_logs = find_todays_logs()
   @weeks_logs = find_past_week_logs()
 
   @all_users = find_all_users()
 
-  if logged_in?
-    erb :index
-    else
-      erb :login
-  end
-
+  erb :index
 end
 
 
 # USERS ---------------------------------------------
 
-get '/login' do # read login
+get '/login' do
 
   erb :login
 
 end
 
-post '/login' do # post login
+post '/login' do
 
   email = params[:email]
   password = params[:password]
@@ -47,6 +38,10 @@ post '/login' do # post login
   if user != nil
     if BCrypt::Password.new( user["digested_password"]) == password
       session[:user_id] = user["id"]
+      weather = todays_weather()
+      session[:weather_symbol_code] = weather['weather_symbol_code']
+      session[:min_temp] = weather['min_temp']
+      session[:max_temp] = weather['max_temp']
     else 
       return erb :incorrect_login
   end
@@ -58,13 +53,13 @@ post '/login' do # post login
 
 end
 
-get '/create_user' do # read signup
+get '/create_user' do
 
   erb :signup
 
 end
 
-post '/create_user' do # post signup
+post '/create_user' do
 
   name = params[:name]
   email = params[:email]
@@ -77,7 +72,8 @@ post '/create_user' do # post signup
 
 end
 
-get '/profile_user/:id' do # read profile
+get '/profile_user/:id' do
+  redirect '/login' unless logged_in?
 
   user = find_one_user(params[:id])
 
@@ -100,22 +96,25 @@ get '/profile_user/:id' do # read profile
 end
 
 delete '/logout_user' do
+  redirect '/login' unless logged_in?
+
   session[:user_id] = nil
   redirect "/login"
 end
 
-get '/success' do # success signup
+get '/success' do
 
   erb :success
 
 end
 
 delete '/delete_user' do
+  redirect '/login' unless logged_in?
 
   user_id = params[:user_id]
   delete_user(user_id)
 
-  redirect '/login_user'
+  redirect '/login'
 
 end
 
@@ -127,10 +126,7 @@ end
 
 def current_user
 
-  user = find_one_user(session[:user_id])
-
-  @user_email = user["email"]
-  @user_name = user["name"]
+  find_one_user(session[:user_id])
 
 end
 
@@ -138,12 +134,13 @@ end
 
 # LOGS ---------------------------------------------
 
-post '/create_log' do # post log
+post '/create_log' do
+  redirect '/login' unless logged_in?
 
   user = find_one_user(session[:user_id])
   user_id = user["id"]
   log = params[:log].gsub("'", "''")
-  date = "#{Time.now.day}.#{Time.now.month}.#{Time.now.year}"
+  date = Time.now
   min_temp = params[:min_temp]
   max_temp = params[:max_temp]
   weather_symbol_code = params[:weather_symbol_code]
@@ -154,15 +151,20 @@ post '/create_log' do # post log
 
 end
 
-delete '/delete_log' do # delete log
+delete '/delete_log' do
+  redirect '/login' unless logged_in?
 
   delete_log(params[:id])
+  user_id = params[:user_id]
 
-  redirect '/'
+  redirect '/' unless !!user_id
+
+  redirect "/profile_user/#{user_id}"
 
 end
 
-patch '/update_log' do # update log
+patch '/update_log' do
+  redirect '/login' unless logged_in?
 
   update_log(params[:id], params[:log])
 

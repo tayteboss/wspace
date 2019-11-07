@@ -86,13 +86,13 @@ end
 
 def find_todays_logs()
 
-    return run_sql("select * from logs where created_at >= current_date")
+    return run_sql("select * from logs where created_at >= current_date order by id desc")
 
 end
 
 def find_past_week_logs()
 
-    return run_sql("select * from logs where created_at > now() - interval '1 week' except select * from logs where created_at >= current_date")
+    return run_sql("select * from logs where created_at > now() - interval '1 week' except select * from logs where created_at >= current_date order by id desc")
 
 end
 

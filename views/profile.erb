@@ -1,14 +1,13 @@
 <main class="index">
 
-    <header class="header header--profile header-img-<%= @weather_symbol_code %>">
+    <header class="header header--profile header-img-<%= session[:weather_symbol_code] %>">
         <nav class="header__nav">
             <div class="header__nav-img-wrapper">
                 <a href="/"><img src="/assets/img/logo-white.svg" alt=""></a>
             </div>
             <div class="header__nav-items">
                 <a href="/">feed</a>
-                <a href="/">about</a>
-                <a href="/profile_user">profile</a>
+                <a href="/profile_user/<%= session[:user_id] %>">profile</a>
                 <form class="logout-form" action="/logout_user" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="logout-btn"><a href="/logout_user"><img src="/assets/img/power.svg" alt=""></a></button>
@@ -53,7 +52,7 @@
                             <% end %> 
                         <% end %>    
                         <% if session[:user_id] == log["user_id"]%>
-                            <form action="/delete_log?id=<%= log["id"] %>" method="post">
+                            <form action="/delete_log?id=<%= log["id"] %>&user_id=<%= log["user_id"] %>" method="post">
                                 <input type="hidden" name="_method" value="delete">
                                 <button class="close-btn"><img class="close" src="/assets/img/exit.svg" alt=""></button>
                             </form>

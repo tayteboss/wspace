@@ -145,6 +145,12 @@ h4 {
   .login-aside-wrapper div {
     width: 50vw;
     overflow: hidden; }
+    .login-aside-wrapper div img {
+      height: 100vh;
+      position: relative;
+      transform: translate(-50%);
+      width: 150%;
+      height: auto; }
 
 .login__inputs-wrapper--signup {
   padding-top: 2.357em; }
