@@ -14,6 +14,7 @@
         border-radius: 10px;
         width: 80vw;
         height: 240px;
+        box-shadow: 3px 8px 35px 1px rgba(0, 0, 0, 0.2);
 
         &__graphic-wrapper--overlay {
             background-repeat: no-repeat;
@@ -61,7 +62,6 @@
                     padding: 0px;
                 }
             }
-
         }
 
     }  
@@ -72,7 +72,7 @@
     position: absolute;
     height: 100vh;
     width: 100vw;
-    cursor: pointer;
+    cursor: url(../../assets/img/exit.png), default;
     z-index: 1;
 }
 

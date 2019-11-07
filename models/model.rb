@@ -51,10 +51,10 @@ end
 
 # LOGS ---------------------------------------------
 
-def create_log(log, date, user_id, min_temp, max_temp, weather_symbol_code)
+def create_log(log, created_at, user_id, min_temp, max_temp, weather_symbol_code)
 
-    return run_sql("insert into logs (log, date, weather, min_temp, max_temp, user_id)
-        values ('#{log}', '#{date}', '#{weather_symbol_code}', '#{min_temp}', '#{max_temp}', '#{user_id}')")
+    return run_sql("insert into logs (log, created_at, weather, min_temp, max_temp, user_id)
+        values ('#{log}', '#{created_at}', '#{weather_symbol_code}', '#{min_temp}', '#{max_temp}', '#{user_id}')")
 
 end
 
@@ -86,14 +86,13 @@ end
 
 def find_todays_logs()
 
-    date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
-    return run_sql("select * from logs where date = '#{date}' order by id desc")
+    return run_sql("select * from logs where created_at >= current_date")
 
 end
 
 def find_past_week_logs()
 
-    # to do
+    return run_sql("select * from logs where created_at > now() - interval '1 week' except select * from logs where created_at >= current_date")
 
 end
 

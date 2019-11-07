@@ -12,7 +12,7 @@ create table users (
 create table logs (
     id serial primary key,
     log text,
-    date text,
+    created_at timestamptz,
     weather integer,
     min_temp integer,
     max_temp integer,

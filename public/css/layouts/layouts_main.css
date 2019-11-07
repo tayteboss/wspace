@@ -172,8 +172,12 @@ h4 {
   align-items: center; }
   .success-wrapper .success-cta h1 {
     color: #fff;
-    margin-top: 0.714em;
+    margin-top: 0;
     margin-bottom: 1.271em; }
+  .success-wrapper .success-cta h4 {
+    color: white;
+    font-size: 1.571em;
+    margin-bottom: 0.714em; }
   .success-wrapper .success-cta__wrapper {
     width: 55.000em; }
     .success-wrapper .success-cta__wrapper img {
@@ -276,7 +280,8 @@ h4 {
     display: flex;
     border-radius: 10px;
     width: 80vw;
-    height: 240px; }
+    height: 240px;
+    box-shadow: 3px 8px 35px 1px rgba(0, 0, 0, 0.2); }
     .log-overlay-bg .log--overlay__graphic-wrapper--overlay {
       background-repeat: no-repeat;
       background-position: center;
@@ -315,7 +320,7 @@ h4 {
   position: absolute;
   height: 100vh;
   width: 100vw;
-  cursor: pointer;
+  cursor: url(../../assets/img/exit.png), default;
   z-index: 1; }
 
 .todays-logs__log-wrapper--overlay {

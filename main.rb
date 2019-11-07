@@ -8,7 +8,7 @@ enable :sessions
 require_relative 'models/model.rb'
 
 
-get '/' do # if not logged in... take to login page
+get '/' do
 
   weather = todays_weather()
   @weather_symbol_code = weather['weather_symbol_code']
@@ -16,7 +16,7 @@ get '/' do # if not logged in... take to login page
   @max_temp = weather['max_temp']
 
   @todays_logs = find_todays_logs()
-  # @past_week_logs = find_past_week_logs()
+  @weeks_logs = find_past_week_logs()
 
   @all_users = find_all_users()
 
@@ -31,13 +31,13 @@ end
 
 # USERS ---------------------------------------------
 
-get '/login_user' do # read login
+get '/login' do # read login
 
   erb :login
 
 end
 
-post '/login_user' do # post login
+post '/login' do # post login
 
   email = params[:email]
   password = params[:password]
@@ -101,7 +101,7 @@ end
 
 delete '/logout_user' do
   session[:user_id] = nil
-  redirect "/login_user"
+  redirect "/login"
 end
 
 get '/success' do # success signup
@@ -143,7 +143,7 @@ post '/create_log' do # post log
   user = find_one_user(session[:user_id])
   user_id = user["id"]
   log = params[:log].gsub("'", "''")
-  date = "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
+  date = "#{Time.now.day}.#{Time.now.month}.#{Time.now.year}"
   min_temp = params[:min_temp]
   max_temp = params[:max_temp]
   weather_symbol_code = params[:weather_symbol_code]

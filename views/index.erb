@@ -29,12 +29,12 @@
     <header class="header header-img-<%= @weather_symbol_code %>">
         <nav class="header__nav">
             <div class="header__nav-img-wrapper">
-                <img src="/assets/img/logo-white.svg" alt="">
+                <a href="/"><img src="/assets/img/logo-white.svg" alt=""></a>
             </div>
             <div class="header__nav-items">
                 <a href="/">feed</a>
                 <a href="/">about</a>
-                <a href="/profile_user">profile</a>
+                <a href="/profile_user/<%= session[:user_id] %>">profile</a>
                 <form class="logout-form" action="/logout_user" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="logout-btn"><a href="/logout_user"><img src="/assets/img/power.svg" alt=""></a></button>
@@ -63,7 +63,39 @@
                         <% @all_users.each do |user| %>
                             <% if user["id"] == log["user_id"] %>
                                 <div class="log__description-wrapper">
-                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["date"] %></span></p>
+                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["created_at"] %></span></p>
+                                    <h4><%= log["log"] %></h4>
+                                </div>
+                            <% end %> 
+                        <% end %>    
+                        <% if session[:user_id] == log["user_id"]%>
+                            <form action="/delete_log?id=<%= log["id"] %>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button class="close-btn"><img class="close" src="/assets/img/exit.svg" alt=""></button>
+                            </form>
+                        <% end %>
+                    </article>
+
+                <% end %>
+
+            </div>
+        </div>
+        <div class="todays-logs">
+            <h1>Past 7 days:</h1>
+            <div class="todays-logs__log-wrapper">
+
+                <% @weeks_logs.each do |log| %>
+
+                    <article class="log">
+                        <div class="log__graphic-wrapper tile-img-<%= log["weather"] %>">
+                            <div class="temperatures">
+                                <span><%= log["min_temp"] %>°C</span><span><%= log["max_temp"] %>°C</span>
+                            </div>
+                        </div>
+                        <% @all_users.each do |user| %>
+                            <% if user["id"] == log["user_id"] %>
+                                <div class="log__description-wrapper">
+                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["created_at"].strftime("%d.%m.%Y")  %></span></p>
                                     <h4><%= log["log"] %></h4>
                                 </div>
                             <% end %> 

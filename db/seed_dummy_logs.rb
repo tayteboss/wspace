@@ -29,23 +29,42 @@ logs = [
     'Gluten-free 3 wolf moon meditation, ethical migas meggings portland live-edge shoreditch locavore ramps occupy irony.',
 ]
 
-20.times do 
+10.times do 
 
     weather = {
         'weather_symbol_code' => rand(1..4),
         'min_temp' => rand(7..15),
         'max_temp' => rand(16..40),
-        # 'date' => "#{rand(1..29)}:#{rand(1..10)}:#{Time.now.year}"
-        'date' => "#{Time.now.day}:#{Time.now.month}:#{Time.now.year}"
+        'created_at' => Time.now
     }
     
     weather_symbol_code = weather["weather_symbol_code"]
     min_temp = weather["min_temp"]
     max_temp = weather["max_temp"]
-    date = weather["date"]
+    created_at = weather["created_at"]
     log = logs.sample
     rand_user_id = random_user().first["id"]
 
-    create_log(log, date, rand_user_id, min_temp, max_temp, weather_symbol_code)
+    create_log(log, created_at, rand_user_id, min_temp, max_temp, weather_symbol_code)
+    
+end
+
+10.times do 
+
+    weather = {
+        'weather_symbol_code' => rand(1..4),
+        'min_temp' => rand(7..15),
+        'max_temp' => rand(16..40),
+        'created_at' => Time.now - 60*60*24*rand(1..6)
+    }
+    
+    weather_symbol_code = weather["weather_symbol_code"]
+    min_temp = weather["min_temp"]
+    max_temp = weather["max_temp"]
+    created_at = weather["created_at"]
+    log = logs.sample
+    rand_user_id = random_user().first["id"]
+
+    create_log(log, created_at, rand_user_id, min_temp, max_temp, weather_symbol_code)
     
 end
