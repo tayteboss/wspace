@@ -102,9 +102,7 @@
                                         <span class="mid-grey"><%= user["location"] %></span>
                                         on
                                         <span class="mid-grey">
-                                            <% created_at = log['created_at'].split(' ').first %>
-                                            <% y, m, d = created_at.split('-')  %>
-                                            <%= d.m.y  %>
+                                            <%= Time.new(log['created_at']).strftime("%d.%m.%Y") %>
                                         </span>
                                     </p>
                                     <h4><%= log["log"] %></h4>

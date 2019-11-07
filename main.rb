@@ -1,7 +1,11 @@
-require 'pry'
 require 'sinatra'
-require 'sinatra/reloader'
-also_reload 'models/*'
+
+if settings.development?
+  require 'sinatra/reloader'
+  also_reload 'models/*'
+  require 'pry'
+end
+
 require 'pg'
 enable :sessions
 
