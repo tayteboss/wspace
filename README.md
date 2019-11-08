@@ -4,12 +4,12 @@
 ![w-space screenshot](screenshot.jpg)
 
 ### Initiate Gameplay Here
-put url here
+https://wspace-app.herokuapp.com/
 
 ## Concept
 W-space is a place for those to share their thoughts about the weather no matter where they are.
 
-The concept for this app came to me after I saw a poster at an art gallery coining a new meaning of 'weather anxiety'. It explained how the majority of the population strike up conversations about the weather when in awkward situations. I related significantly to this phenominem which then lead me to want to create an app for those who 'suffer' from these symptoms. 
+The concept for this app came to me after I saw a poster at an art gallery coining a new meaning of 'weather anxiety'. It explained how the majority of the population strike up conversations about the weather when in awkward situations. I related significantly to this phenomenon which then lead me to want to create an app for those who 'suffer' from these symptoms. 
 
 Overall the app's tone of voice is light hearted and the UI is minimalistic using splashes of gradients to highlight points of interest. The goal for this app's design is to be a stripped back version of twitter where the 'logs' are purely texted based accompanied by a graphic symbolising the weather.
 

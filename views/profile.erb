@@ -46,7 +46,20 @@
                         <% @all_users.each do |user| %>
                             <% if user["id"] == log["user_id"] %>
                                 <div class="log__description-wrapper">
-                                    <p class="id-line"><a class="mid-grey-link" href="/profile_user/<%= user["id"] %>"><%= user["name"] %></a> from <span class="mid-grey"><%= user["location"] %></span> on <span class="mid-grey"><%= log["created_at"] %></span></p>
+                                    <p class="id-line">
+                                        <a class="mid-grey-link" href="/profile_user/<%= user["id"] %>">
+                                            <%= user["name"] %>
+                                        </a>
+                                        from
+                                        <span class="mid-grey"><%= user["location"] %></span>
+                                        on
+                                        <span class="mid-grey">
+                                            <% time = log['created_at'] %>
+                                            <% date = time.split(' ').first %>
+                                            <% y, d, m = date.split('-') %>
+                                            <%= "#{d}.#{m}.#{y}" %>
+                                        </span>
+                                    </p>
                                     <h4><%= log["log"] %></h4>
                                 </div>
                             <% end %> 
