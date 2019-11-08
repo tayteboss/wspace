@@ -9,8 +9,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.071em; }
-    .index .header__nav-img-wrapper img {
-      width: 7.857em; }
+    .index .header__nav-img-wrapper .logo-static {
+      width: 7.857em;
+      opacity: 1; }
+    .index .header__nav-img-wrapper .hovered-logo-wrapper {
+      position: absolute;
+      top: 18px;
+      left: 21px; }
+      .index .header__nav-img-wrapper .hovered-logo-wrapper .logo-hover {
+        width: 7.53em; }
     .index .header__nav-items a {
       color: #fff;
       font-size: 1.143em;

@@ -18,8 +18,19 @@
 
             &-img-wrapper {
 
-                img {
+                .logo-static {
                     width: 7.857em;
+                    opacity: 1;
+                }
+
+                .hovered-logo-wrapper {
+                    position: absolute;
+                    top: 18px;
+                    left: 21px;
+
+                    .logo-hover {
+                        width: 7.53em;
+                    }
                 }
             }
 

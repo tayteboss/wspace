@@ -3,7 +3,7 @@
 
 ![w-space screenshot](screenshot.jpg)
 
-### Initiate Gameplay Here
+### Tell the world your opinion here
 https://wspace-app.herokuapp.com/
 
 ## Concept

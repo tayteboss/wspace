@@ -1,4 +1,20 @@
 
+logoWrapper = document.querySelector('.header__nav-img-wrapper')
+logoHover = document.querySelector('.logo-hover')
+logoStatic = document.querySelector('.logo-static')
+
+$(logoWrapper).mouseenter(function() {
+    $(logoStatic).animate({opacity: 0}, 100)
+    $(logoHover).animate({opacity: 1}, 100)
+})
+
+$(logoWrapper).mouseleave(function() {
+    $(logoStatic).animate({opacity: 1}, 100)
+    $(logoHover).animate({opacity: 0}, 100)
+})
+
+
+
 function bgMove() {
     $(window).mousemove(function(event) {
         $('.backdrop').animate({
