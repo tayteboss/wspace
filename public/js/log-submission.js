@@ -32,6 +32,7 @@ bgMove()
 var logOverlay = document.querySelector('.log-overlay-bg')
 var closeWrapper = document.querySelector('.close-wrapper')
 var logBtn = document.querySelector('.log-btn')
+var body = document.querySelector('body')
 var deleteConfirm = document.querySelector('.delete-confirm')
 
 $(deleteConfirm).css("display", "inline").hide()
@@ -40,6 +41,7 @@ $(logOverlay).css("display", "flex").hide()
 function openLogSubmission() {
 
     $(logOverlay).fadeIn("slow")
+    $(body).addClass('overflow-hidden')
     $(closeWrapper).fadeIn("slow")
 
 }
@@ -47,6 +49,7 @@ function openLogSubmission() {
 function closeLogSubmission() {
 
     $(logOverlay).fadeOut("slow")
+    $(body).removeClass('overflow-hidden')
     $(closeWrapper).fadeOut("slow")
 
 }
