@@ -11,12 +11,13 @@ W-space is a place for those to share their thoughts about the weather no matter
 
 The concept for this app came to me after I saw a poster at an art gallery coining a new meaning of 'weather anxiety'. It explained how the majority of the population strike up conversations about the weather when in awkward situations. I related significantly to this phenomenon which then lead me to want to create an app for those who 'suffer' from these symptoms. 
 
-Overall the app's tone of voice is light hearted and the UI is minimalistic using splashes of gradients to highlight points of interest. The goal for this app's design is to be a stripped back version of twitter where the 'logs' are purely texted based accompanied by a graphic symbolising the weather.
+Overall the app's tone of voice is light hearted and the UI is minimalistic using splashes of gradients to highlight points of interest. The goal for this app's design was to be a stripped back crud app where the 'logs' are purely texted based accompanied by a graphic symbolising the weather.
 
 ## Technology & Concepts used
 * Ruby
 * Javascript
-* JQuery Animations
+* JQuery
+* SQL
 * PSQL
 * Heroku
 * SASS
@@ -27,7 +28,7 @@ Overall the app's tone of voice is light hearted and the UI is minimalistic usin
 Flow Control seemed to be reoccuring problem throughout this process.
 
 ### Working with Dates
-Without frameworks like Ruby on Rails. I struggled to work with dates with ease.
+Without frameworks like Rails. I struggled to work with date formats.
 
 ### Using Correct Asset Paths
 Kept forgetting to reference files & assets from the public folder as the root.
@@ -37,7 +38,7 @@ Learning to use guard statements to check if a user was a logged in was a big he
 
 ## Lessons Learned
 * Don't worry about refactoring till logic is complete
-* Start designing once you know all the features (to avoid re-designing)
+* Start designing once you know most/all the features in the app(to avoid time spent re-designing)
 * Utilising 'session' to store data
 
 ## WIP
