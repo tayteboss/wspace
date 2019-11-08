@@ -26,15 +26,15 @@ function bgMove() {
     });
 
 }
-
-
 bgMove()
 
 
 var logOverlay = document.querySelector('.log-overlay-bg')
 var closeWrapper = document.querySelector('.close-wrapper')
 var logBtn = document.querySelector('.log-btn')
+var deleteConfirm = document.querySelector('.delete-confirm')
 
+$(deleteConfirm).css("display", "inline").hide()
 $(logOverlay).css("display", "flex").hide()
 
 function openLogSubmission() {

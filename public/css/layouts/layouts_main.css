@@ -280,6 +280,9 @@ h4 {
   box-shadow: 3px 8px 13px 1px rgba(0, 0, 0, 0.2);
   bottom: 5px; }
 
+.delete-confirm {
+  display: inline; }
+
 .log-overlay-bg {
   position: absolute;
   height: 100vh;
