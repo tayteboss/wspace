@@ -563,6 +563,9 @@ h4 {
 .mid-grey-link:hover {
   color: #333333; }
 
+.edit-form {
+  display: inline; }
+
 .d-none {
   display: none; }
 

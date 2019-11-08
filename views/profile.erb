@@ -17,11 +17,20 @@
         <section class="header__cta">
             <h1 class="profile-h1"><%= @user_name %><br> has made <%= @indi_logs["count"] %> posts...</h1>
             <% if session[:user_id] == @user_id%>
-                <p class="delete-user">delete account...</p>
+                <p class="account-edits delete-user">delete account</p>
                 <form class="delete-confirm d-none" action="/delete_user?user_id=<%= session[:user_id] %>" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <button class="delete-user-btn"><p class="delete-user">click again to confirm this action</p></button>
                 </form>
+
+                <span class="account-edits"><p> | </p></span>
+
+                <span>
+                    <form class="edit-confirm edit-form" action="/edit_user" method="get">
+                        <button class="delete-user-btn"><p class="delete-user">edit account details</p></button>
+                    </form>
+                </span>
+
             <% end %>
         </section>
     </header>

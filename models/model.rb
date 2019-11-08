@@ -41,6 +41,13 @@ def delete_user(user_id)
 
 end
 
+def edit_user(name, email, password, location, user_id)
+
+    password_digest = BCrypt::Password.create(password)
+    return run_sql("update users set email = '#{email}', name = '#{name}', digested_password = '#{password_digest}', location = '#{location}' where id = '#{user_id}'")
+
+end
+
 def random_user()
 
     return run_sql("select id from users ORDER BY random() limit 1")

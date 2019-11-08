@@ -99,6 +99,27 @@ get '/profile_user/:id' do
   
 end
 
+get '/edit_user' do
+
+  @user = find_one_user(session[:user_id])
+  erb :edit_user
+
+end
+
+patch '/edit_user' do
+
+  name = params[:name]
+  email = params[:email]
+  password = params[:password]
+  location = params[:location]
+  user_id = session[:user_id]
+
+  edit_user(name, email, password, location, user_id)
+
+  redirect '/'
+
+end
+
 delete '/logout_user' do
   redirect '/login' unless logged_in?
 
