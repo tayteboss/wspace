@@ -38,6 +38,7 @@ Learning to use guard statements to check if a user was a logged in was a big he
 ## Lessons Learned
 * Don't worry about refactoring till logic is complete
 * Start designing once you know all the features (to avoid re-designing)
+* Utilising 'session' to store data
 
 ## WIP
 * Implementing a weather API for realtime weather (randomised weather at the moment)
