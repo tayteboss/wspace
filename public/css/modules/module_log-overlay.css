@@ -5,8 +5,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 2; }
+  align-items: center; }
   .log-overlay-bg .log--overlay {
     background-color: #fff;
     display: flex;
@@ -53,7 +52,7 @@
   height: 100vh;
   width: 100vw;
   cursor: url(../../assets/img/exit.png), default;
-  z-index: 3; }
+  z-index: 1; }
 
-.log-module {
-  z-index: 5; }
+.todays-logs__log-wrapper--overlay {
+  z-index: 2; }
